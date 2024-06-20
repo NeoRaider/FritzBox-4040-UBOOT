@@ -568,7 +568,7 @@ int get_eth_mac_address(uchar *enetaddr, uint no_of_macs)
 static void ipq40xx_set_ethmac_addr(void)
 {
 	int i, ret;
-	uchar enetaddr[CONFIG_IPQ_NO_MACS * 6];
+	uchar enetaddr[CONFIG_IPQ_NO_MACS * 6] = {};
 	uchar *mac_addr;
 	char ethaddr[16] = "ethaddr";
 	char mac[64];
