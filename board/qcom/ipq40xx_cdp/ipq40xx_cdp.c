@@ -482,6 +482,9 @@ int get_eth_mac_address(uchar *enetaddr, uint no_of_macs)
 	if (length < sizeof(data))
 		return -EINVAL;
 
+	if (no_of_macs < 1)
+		return 0;
+
 	urconfig = (const u32 *)&data[0x98];
 	if (*urconfig > (art_offset + length - 6) || *urconfig < art_offset) {
 		printf("maca pointer invalid: %x\n", *urconfig);
@@ -492,6 +495,9 @@ int get_eth_mac_address(uchar *enetaddr, uint no_of_macs)
 
 	printf("maca: %x:%x:%x:%x:%x:%x\n", enetaddr[0], enetaddr[1], enetaddr[2],
 		enetaddr[3], enetaddr[4], enetaddr[5]);
+
+	if (no_of_macs < 2)
+		return 0;
 
 	urconfig = (const uint32_t *)&data[0xA0];
 	if (*urconfig > (art_offset + length - 6) || *urconfig < art_offset) {
